@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Label?>
+
+<?import javafx.scene.layout.HBox?>
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.dbconnect.PrimaryController" spacing="10" alignment="CENTER">
+   <Label text="Gestion des Equipes et Joueurs" style="-fx-font-size: 18px;"/>
+
+   <!-- Recherche d'une équipe -->
+   <HBox spacing="10">
+      <TextField fx:id="searchField" promptText="Rechercher une équipe" />
+      <Button text="Rechercher" onAction="#handleSearch" />
+   </HBox>
+
+   <!-- Table pour afficher les équipes -->
+   <TableView fx:id="equipesTable" prefHeight="200">
+      <TableColumn fx:id="colNomEquipe" text="Nom de l'équipe" />
+      <TableColumn fx:id="colVilleEquipe" text="Ville de l'équipe" />
+   </TableView>
+
+   <!-- Table pour afficher les joueurs d'une équipe -->
+   <TableView fx:id="joueursTable" prefHeight="200">
+      <TableColumn fx:id="colNomJoueur" text="Nom du joueur" />
+      <TableColumn fx:id="colPositionJoueur" text="Position" />
+      <TableColumn fx:id="colNumeroJoueur" text="Numéro" />
+   </TableView>
+
+   <!-- Ajouter une équipe -->
+   <HBox spacing="10">
+      <TextField fx:id="equipeNomField" promptText="Nom de l'équipe" />
+      <TextField fx:id="equipeVilleField" promptText="Ville de l'équipe" />
+      <Button text="Ajouter l'équipe" onAction="#handleAddEquipe" />
+   </HBox>
+
+   <!-- Ajouter un joueur -->
+   <HBox spacing="10">
+      <TextField fx:id="joueurNomField" promptText="Nom du joueur" />
+      <TextField fx:id="joueurPositionField" promptText="Position du joueur" />
+      <TextField fx:id="joueurNumeroField" promptText="Numéro du joueur" />
+      <Button text="Ajouter le joueur" onAction="#handleAddJoueur" />
+   </HBox>
+</VBox>
