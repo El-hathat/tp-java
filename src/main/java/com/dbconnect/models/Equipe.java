@@ -15,4 +15,6 @@ public class Equipe {
     private String ville;
 
     // Constructeurs, getters et setters
+
+
 }

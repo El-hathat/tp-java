@@ -1,5 +1,7 @@
 package com.dbconnect.Dao;
 
+import com.dbconnect.models.Equipe;
+
 import java.util.List;
 
 public interface Dao<T,E> {
@@ -8,5 +10,6 @@ public interface Dao<T,E> {
     void save(T entity);
     void deleteById(Long id);
     void update(T entity);
+    List<T> findByKeyword(String keyword);
 }
 

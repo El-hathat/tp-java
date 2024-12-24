@@ -9,11 +9,16 @@ import java.util.List;
 
 public class EquipeDAOImpl implements EquipeDAO {
 
+
+
+        Connection conn = SingletonConnexionDB.getConnexion();
+
+
     @Override
     public List<Equipe> findAll() {
         List<Equipe> equipes = new ArrayList<>();
         String query = "SELECT * FROM equipe";
-        try (Connection conn = SingletonConnexionDB.getConnexion();
+        try (
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(query)) {
             while (rs.next()) {
@@ -32,7 +37,7 @@ public class EquipeDAOImpl implements EquipeDAO {
     @Override
     public Equipe findById(Long id) {
         String query = "SELECT * FROM equipe WHERE id = ?";
-        try (Connection conn = SingletonConnexionDB.getConnexion();
+        try (
              PreparedStatement stmt = conn.prepareStatement(query)) {
 
             stmt.setLong(1, id);
@@ -54,7 +59,7 @@ public class EquipeDAOImpl implements EquipeDAO {
     @Override
     public void save(Equipe equipe) {
         String query = "INSERT INTO equipe (nom, ville) VALUES (?, ?)";
-        try (Connection conn = SingletonConnexionDB.getConnexion();
+        try (
              PreparedStatement stmt = conn.prepareStatement(query)) {
 
             stmt.setString(1, equipe.getNom());
@@ -68,7 +73,7 @@ public class EquipeDAOImpl implements EquipeDAO {
      @Override
       public void deleteById(Long id) {
         String query = "DELETE FROM equipe WHERE id = ?";
-        try (Connection conn = SingletonConnexionDB.getConnexion();
+        try (
              PreparedStatement stmt = conn.prepareStatement(query)) {
 
             stmt.setLong(1, id);
@@ -81,7 +86,7 @@ public class EquipeDAOImpl implements EquipeDAO {
     @Override
     public void update(Equipe equipe) {
         String query = "UPDATE equipe SET nom = ?, ville = ? WHERE id = ?";
-        try (Connection conn = SingletonConnexionDB.getConnexion();
+        try (
              PreparedStatement stmt = conn.prepareStatement(query)) {
 
             stmt.setString(1, equipe.getNom());
@@ -98,7 +103,7 @@ public class EquipeDAOImpl implements EquipeDAO {
         List<Equipe> equipes = new ArrayList<>();
         String query = "SELECT * FROM equipe WHERE nom LIKE ? OR ville LIKE ?";
 
-        try (Connection conn = SingletonConnexionDB.getConnexion();
+        try (
              PreparedStatement stmt = conn.prepareStatement(query)) {
 
             // Utilisation de % pour rechercher des correspondances partielles

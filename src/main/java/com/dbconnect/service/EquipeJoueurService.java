@@ -22,7 +22,7 @@ public class EquipeJoueurService implements IEquipeJoueurService {
 
     @Override
     public void ajouterEquipe(Equipe equipe) {
-
+        equipeDAO.save(equipe);
     }
 
 

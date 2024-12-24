@@ -4,6 +4,7 @@ module com.dbconnect {
     requires java.sql;
     requires lombok;
 
-    opens com.dbconnect to javafx.fxml;
+    opens com.dbconnect.controller to javafx.fxml;
+    opens com.dbconnect.models to javafx.base;
     exports com.dbconnect;
 }

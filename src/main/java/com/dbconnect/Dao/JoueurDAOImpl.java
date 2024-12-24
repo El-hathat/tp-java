@@ -5,20 +5,46 @@ import com.dbconnect.models.Equipe;
 import com.dbconnect.models.Joueur;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class JoueurDAOImpl implements JoueurDAO {
+    Connection conn = SingletonConnexionDB.getConnexion();
 
     @Override
     public List<Joueur> findAll() {
-        return null;
+        String query = "SELECT * FROM joueur";
+        List<Joueur> jrs=new ArrayList<>();
+        try (
+                PreparedStatement stmt = conn.prepareStatement(query)) {
+
+
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Joueur joueur = new Joueur();
+                joueur.setId(rs.getLong("id"));
+                joueur.setNom(rs.getString("nom"));
+                joueur.setPosition(rs.getString("position"));
+                joueur.setNumero(rs.getInt("numero"));
+                // Récupérer l'équipe associée
+                long equipeId = rs.getLong("equipe_id");
+                Equipe equipe = new EquipeDAOImpl().findById(equipeId); // Trouver l'équipe associée
+                joueur.setEquipe(equipe);
+                jrs.add(joueur);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+        return jrs;
     }
 
     // 1. Trouver un joueur par son ID
     @Override
     public Joueur findById(Long id) {
         String query = "SELECT * FROM joueur WHERE id = ?";
-        try (Connection conn = SingletonConnexionDB.getConnexion();
+        try (
              PreparedStatement stmt = conn.prepareStatement(query)) {
 
             stmt.setLong(1, id);
@@ -46,7 +72,7 @@ public class JoueurDAOImpl implements JoueurDAO {
     @Override
     public void save(Joueur joueur) {
         String query = "INSERT INTO joueur (nom, position, numero, equipe_id) VALUES (?, ?, ?, ?)";
-        try (Connection conn = SingletonConnexionDB.getConnexion();
+        try (
              PreparedStatement stmt = conn.prepareStatement(query)) {
 
             stmt.setString(1, joueur.getNom());
@@ -63,7 +89,7 @@ public class JoueurDAOImpl implements JoueurDAO {
     @Override
     public void deleteById(Long id) {
         String query = "DELETE FROM joueur WHERE id = ?";
-        try (Connection conn = SingletonConnexionDB.getConnexion();
+        try (
              PreparedStatement stmt = conn.prepareStatement(query)) {
 
             stmt.setLong(1, id);
@@ -77,7 +103,7 @@ public class JoueurDAOImpl implements JoueurDAO {
     @Override
     public void update(Joueur joueur) {
         String query = "UPDATE joueur SET nom = ?, position = ?, numero = ?, equipe_id = ? WHERE id = ?";
-        try (Connection conn = SingletonConnexionDB.getConnexion();
+        try (
              PreparedStatement stmt = conn.prepareStatement(query)) {
 
             stmt.setString(1, joueur.getNom());
@@ -89,12 +115,66 @@ public class JoueurDAOImpl implements JoueurDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+
+    }
+
+    @Override
+    public List<Joueur> findByKeyword(String keyword) {
+        String query = "SELECT * FROM joueur where nom LIKE '"+keyword+"%' OR position LIKE '"+keyword+"%' OR numero LIKE '"+keyword+"%'";
+        List<Joueur> jrs=new ArrayList<>();
+        try  {
+                PreparedStatement stmt = conn.prepareStatement(query);
+
+
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Joueur joueur = new Joueur();
+                joueur.setId(rs.getLong("id"));
+                joueur.setNom(rs.getString("nom"));
+                joueur.setPosition(rs.getString("position"));
+                joueur.setNumero(rs.getInt("numero"));
+                // Récupérer l'équipe associée
+                long equipeId = rs.getLong("equipe_id");
+                Equipe equipe = new EquipeDAOImpl().findById(equipeId); // Trouver l'équipe associée
+                joueur.setEquipe(equipe);
+                jrs.add(joueur);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+        return jrs;
     }
 
 
     @Override
     public List<Joueur> findByEquipe(Equipe equipe) {
-        return null;
+        String query = "SELECT * FROM joueur WHERE equipe_id=?";
+        List<Joueur> jrs=new ArrayList<>();
+        try (
+                PreparedStatement stmt = conn.prepareStatement(query)) {
+   stmt.setLong(1,equipe.getId());
+
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Joueur joueur = new Joueur();
+                joueur.setId(rs.getLong("id"));
+                joueur.setNom(rs.getString("nom"));
+                joueur.setPosition(rs.getString("position"));
+                joueur.setNumero(rs.getInt("numero"));
+                // Récupérer l'équipe associée
+                long equipeId = rs.getLong("equipe_id");
+
+                joueur.setEquipe(equipe);
+                jrs.add(joueur);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return  jrs;
     }
 }
 

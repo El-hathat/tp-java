@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="848.0" prefWidth="1297.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dbconnect.controller.JoueurController">
+   <top>
+      <GridPane hgap="10.0" maxHeight="1.7976931348623157E308" prefHeight="372.0" prefWidth="1213.0" vgap="20.0" BorderPane.alignment="CENTER">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="646.0" minWidth="10.0" prefWidth="275.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="1114.0" minWidth="10.0" prefWidth="1012.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="57.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="67.0" minHeight="10.0" prefHeight="48.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="46.0" minHeight="10.0" prefHeight="46.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="46.0" minHeight="10.0" prefHeight="46.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="46.0" minHeight="10.0" prefHeight="46.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <padding>
+            <Insets top="16.0" />
+         </padding>
+         <children>
+            <Label text="Nom">
+               <GridPane.margin>
+                  <Insets left="63.0" />
+               </GridPane.margin>
+               <font>
+                  <Font size="20.0" />
+               </font>
+               <effect>
+                  <Shadow height="0.0" radius="0.0" width="0.0" />
+               </effect>
+               <padding>
+                  <Insets left="12.0" />
+               </padding>
+            </Label>
+            <Label text="Position" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets left="63.0" />
+               </GridPane.margin>
+               <font>
+                  <Font size="20.0" />
+               </font>
+               <effect>
+                  <Shadow height="0.0" radius="0.0" width="0.0" />
+               </effect>
+               <padding>
+                  <Insets left="12.0" />
+               </padding>
+            </Label>
+            <Label prefHeight="26.0" prefWidth="107.0" text="Numero " GridPane.rowIndex="2">
+               <GridPane.margin>
+                  <Insets left="63.0" />
+               </GridPane.margin>
+               <font>
+                  <Font size="20.0" />
+               </font>
+               <effect>
+                  <Shadow height="0.0" radius="0.0" width="0.0" />
+               </effect>
+               <padding>
+                  <Insets left="12.0" />
+               </padding>
+            </Label>
+            <TextField fx:id="nomText" prefHeight="31.0" prefWidth="904.0" GridPane.columnIndex="1">
+               <GridPane.margin>
+                  <Insets right="300.0" />
+               </GridPane.margin>
+            </TextField>
+            <TextField fx:id="positionText" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets right="300.0" />
+               </GridPane.margin>
+            </TextField>
+            <TextField fx:id="numeroText" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <GridPane.margin>
+                  <Insets right="300.0" />
+               </GridPane.margin>
+            </TextField>
+            <Label prefHeight="26.0" prefWidth="107.0" text="Equipe" GridPane.rowIndex="3">
+               <effect>
+                  <Shadow height="0.0" radius="0.0" width="0.0" />
+               </effect>
+               <font>
+                  <Font size="20.0" />
+               </font>
+               <padding>
+                  <Insets left="14.0" />
+               </padding>
+               <GridPane.margin>
+                  <Insets left="61.0" />
+               </GridPane.margin>
+            </Label>
+            <ComboBox fx:id="equipeText" prefHeight="31.0" prefWidth="209.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Button mnemonicParsing="false" onAction="#ajouterJ" prefHeight="51.0" prefWidth="208.0" text="Ajouter" GridPane.rowIndex="4">
+               <GridPane.margin>
+                  <Insets left="29.0" />
+               </GridPane.margin>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#modifierJ" prefHeight="51.0" prefWidth="208.0" text="Modifier" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Button mnemonicParsing="false" onAction="#supprimerJ" prefHeight="51.0" prefWidth="208.0" text="Supprimer" GridPane.columnIndex="1" GridPane.rowIndex="4">
+               <GridPane.margin>
+                  <Insets left="260.0" />
+               </GridPane.margin>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#rechercherJ" prefHeight="51.0" prefWidth="208.0" text="Rechercher" GridPane.columnIndex="1" GridPane.rowIndex="4">
+               <GridPane.margin>
+                  <Insets left="520.0" />
+               </GridPane.margin>
+            </Button>
+            <TextField fx:id="rechercherText" prefHeight="31.0" prefWidth="332.0" promptText="rechercher ..." GridPane.columnIndex="1" GridPane.rowIndex="4">
+               <GridPane.margin>
+                  <Insets left="750.0" right="20.0" />
+               </GridPane.margin>
+            </TextField>
+         </children>
+      </GridPane>
+   </top>
+   <left>
+      <HBox prefHeight="476.0" prefWidth="0.0" BorderPane.alignment="CENTER" />
+   </left>
+   <center>
+      <TableView fx:id="tableJoueurs" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <columns>
+          <TableColumn fx:id="joueurID" prefWidth="75.0" text="JoueurID" />
+          <TableColumn fx:id="nom" prefWidth="267.0" text="Nom" />
+            <TableColumn fx:id="position" prefWidth="118.0" text="Position" />
+            <TableColumn fx:id="numero" prefWidth="113.0" text="Numero" />
+            <TableColumn fx:id="equipeID" prefWidth="137.0" text="EquipeID" />
+            <TableColumn fx:id="equipeNom" prefWidth="255.0" text="Nom d'equipe" />
+            <TableColumn fx:id="ville" prefWidth="325.0" text="Ville" />
+        </columns>
+      </TableView>
+   </center>
+</BorderPane>

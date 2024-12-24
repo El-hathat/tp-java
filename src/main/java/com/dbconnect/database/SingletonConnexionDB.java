@@ -6,15 +6,21 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class SingletonConnexionDB {
-    private static Connection connection;
+
 
     private SingletonConnexionDB() {}
 
-    public static Connection getConnexion() throws SQLException {
-        if (connection == null) {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/gestion_equipes", "root", "");
-        }
-        return connection;
+    public static Connection getConnexion() {
+
+            try {
+                return DriverManager.getConnection("jdbc:mysql://localhost:3306/gestion_equipes", "root", "");
+            }
+            catch(SQLException e){
+                e.printStackTrace();
+                return null;
+            }
+
+
     }
 }
 

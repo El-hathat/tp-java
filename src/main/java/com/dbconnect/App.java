@@ -23,7 +23,7 @@ public class App extends Application {
 
   @Override
   public void start(Stage stage) throws IOException {
-    scene = new Scene(loadFXML("primary"), 640, 480);
+    scene = new Scene(loadFXML("joueur"), 640, 480);
     stage.setScene(scene);
     stage.show();
   }
@@ -37,7 +37,14 @@ public class App extends Application {
     return fxmlLoader.load();
   }
 
+
   public static void main(String[] args) {
+    launch();
+  }
+
+
+
+  void consoleTest(){
     IEquipeJoueurService service = new EquipeJoueurService();  // Service métier
     Scanner scanner = new Scanner(System.in);
 
@@ -80,7 +87,7 @@ public class App extends Application {
           System.out.print("ID de l'équipe à laquelle ajouter le joueur: ");
           Long equipeId = scanner.nextLong();
           scanner.nextLine(); // Consommer la nouvelle ligne
-          service.ajouterJoueur(new Joueur(nomJoueur, positionJoueur, numeroJoueur, new Equipe(1L,null,null)));
+          service.ajouterJoueur(new Joueur(nomJoueur, positionJoueur, numeroJoueur, new Equipe(equipeId,null,null)));
           break;
 
         case 3:
